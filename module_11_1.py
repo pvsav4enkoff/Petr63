@@ -1,40 +1,103 @@
 import requests
 import pandas as pd
 import numpy as np
-
+import matplotlib.pyplot as plt
+import random
+guests_names = [
+'Maria', 'Oleg', 'Vakhtang', 'Sergey', 'Darya', 'Arman',
+'Vitoria', 'Nikita', 'Galina', 'Pavel', 'Ilya', 'Alexandra'
+]
+guest_age = [20, 25, 36, 41, 17, 12, 71, 58, 45, 56, 25, 9]
 
 class Text_url_data:
-    def get_post(self,*pl):
-            return requests.post('https://httpbin.org/post', data=pl)
+    def get_post(self, *pl, url_post):
+            return requests.post(url_post, data=pl)
     def data_frame(self,**data):
         return pd.DataFrame(data)
 
-n1=(np.arange(1,41)**2)
-n2=(np.arange(42,82)-2)
+    def get_arange(self,start,stop,work,num):
+        match work:
+            case "**":
+                return (np.arange(start, stop) ** num)
+            case "*":
+                return (np.arange(start, stop) * num)
+            case "+":
+                return (np.arange(start, stop) + num)
+            case "-":
+                return (np.arange(start, stop) - num)
+            case _:
+                print('Не известное действие.')
+    def mean_min_max(self,*data):
+        arr = np.array(data)
+        return np.mean(arr), np.min(arr), np.max(arr)
 
-# num = np.array(n1,n2)
-print(n1)
-print(n2)
 
 tu=Text_url_data()
 payload_tuples = [('key1', 'value1'), ('key1', 'value2')]
-r1=tu.get_post(*payload_tuples)
+url_p = 'https://httpbin.org/post'
+r1=tu.get_post(*payload_tuples,url_post=url_p)
 print(r1.text)
-print(r1.url)
+print(r1.headers)
 
-data1 = {'Имя': ['Иван', 'Мария', 'Петр'],
-        'Возраст': [25, 31, 42]}
+
+data1={"Имя": guests_names, "Возраст":guest_age}
 
 r2=tu.data_frame(**data1)
 print(r2)
-df1 = pd.DataFrame({'Имя': ['Иван', 'Мария'],
-                    'Возраст': [25, 31]})
-df2 = pd.DataFrame({'Имя': ['Петр', 'Сергей'],
-                    'Возраст': [42, 35]})
+df1 = pd.DataFrame({'Имя': ['Иван', 'Мария'],'Возраст': [25, 31]})
+df2 = pd.DataFrame({'Имя': ['Петр', 'Сергей'],'Возраст': [42, 35]})
 
-r3=tu.data_frame(**df1)
-r4=tu.data_frame(**df2)
-df_concat = pd.concat([df1, df2])
+r3 = tu.data_frame(**df1)
+r4 = tu.data_frame(**df2)
+r5 = tu.data_frame(**data1)
+df_concat = pd.concat([r3, r4, r5])
 print(df_concat)
+
 df_filtered = df_concat[df_concat['Возраст'] > 30]
 print(df_filtered)
+
+
+r6 = tu.get_arange(12,55,"*",3)
+print(r6)
+r5 = tu.get_arange(12,55,"**",3)
+print(r5)
+r5 = tu.get_arange(19,49,"-",3)
+print(r5)
+r6 = tu.get_arange(19,49,"+",3)
+print(r6)
+print(tu.mean_min_max(guest_age))
+print(np.linspace(1, 5, 5))
+
+for i in range(2):
+    fig, ax = plt.subplots()
+    ax.plot([random.randint(1, 10), random.randint(1, 10), random.randint(-5, 10), random.randint(-5, 10)],
+            [random.randint(5, 10), random.randint(5, 10), random.randint(5, 10), random.randint(5, 10)])
+    plt.show(block=False)
+    plt.pause(2)
+    plt.close()
+for i in range(2):
+    r5 = [random.randint(1, 10) for j in range(100)]
+    r6 = [random.randint(5, 20) for j in range(100)]
+    fig, ax = plt.subplots(figsize=(10, 5))
+    ax.scatter(r5, r6, s=70, facecolor='C0', edgecolor='k')
+    plt.show(block=False)
+    plt.pause(2)
+    plt.close()
+
+# b = np.matrix([[1, 2], [3, 4]])
+# b_asarray = np.asarray(b)
+for i in range(5):
+    np.random.seed(19680801)  # seed the random number generator.
+    data = {'a': np.arange(50),
+            'c': np.random.randint(0, 50, 50),
+            'd': np.random.randn(50)}
+    data['b'] = data['a'] + 10 * np.random.randn(50)
+    data['d'] = np.abs(data['d']) * 100
+
+    fig, ax = plt.subplots(figsize=(5, 2.7), layout='constrained')
+    ax.scatter('a', 'b', c='c', s='d', data=data)
+    ax.set_xlabel('entry a')
+    ax.set_ylabel('entry b')
+    plt.show(block=False)
+    plt.pause(2)
+    plt.close()
