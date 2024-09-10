@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import random
+from PIL import Image, ImageFilter, ImageDraw, ImageFont
 guests_names = [
 'Maria', 'Oleg', 'Vakhtang', 'Sergey', 'Darya', 'Arman',
 'Vitoria', 'Nikita', 'Galina', 'Pavel', 'Ilya', 'Alexandra'
@@ -86,7 +87,7 @@ for i in range(2):
 
 # b = np.matrix([[1, 2], [3, 4]])
 # b_asarray = np.asarray(b)
-for i in range(5):
+for i in range(2):
     np.random.seed(19680801)  # seed the random number generator.
     data = {'a': np.arange(50),
             'c': np.random.randint(0, 50, 50),
@@ -101,3 +102,36 @@ for i in range(5):
     plt.show(block=False)
     plt.pause(2)
     plt.close()
+
+    img = Image.open('bird.JPG')
+    img.save('bird2.jpg')
+    img = img.resize((800, 600))
+    img.save('bird3.jpg')
+
+    img = Image.open('bird.JPG')
+    img = img.filter(ImageFilter.BLUR)
+
+    img.save('bird_blur.jpg')
+
+    print(img.size)
+    print(img.mode)
+
+    img = Image.open('bird.jpg')
+
+    draw = ImageDraw.Draw(img)
+
+    draw.rectangle((100, 100, 300,300), fill='red')
+    img = Image.new('RGB', (400, 300), color=(73, 109, 137))
+
+    d = ImageDraw.Draw(img)
+
+    ellipse_x0 = 50
+    ellipse_y0 = 50
+    ellipse_x1 = 350
+    ellipse_y1 = 250
+
+    # Рисование эллипса
+    d.ellipse([(ellipse_x0, ellipse_y0), (ellipse_x1, ellipse_y1)], fill=(255, 255, 0))
+
+    # Сохранение картинки
+    img.save('ellipse.png')
