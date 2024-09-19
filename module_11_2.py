@@ -42,5 +42,7 @@ print(introspection_info('строка'))
 print(introspection_info(data_1))
 print(introspection_info(m))
 print(introspection_info(introspection_info))
-
+print(introspection_info.__code__.co_varnames)
+print(introspection_info.__code__.co_varnames.__len__())
+print(f'{introspection_info.__name__} аргумент {introspection_info.__annotations__}')
 
