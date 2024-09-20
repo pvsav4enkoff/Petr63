@@ -38,6 +38,9 @@ data_1=date(1963, 3, 15)
 m= mainClass("Petr",61,data_1)
 f = lambda x, y, z: x + y + z
 print(m.num_year())
+with open('test_file1.txt', encoding="utf-8") as file:
+    print(introspection_info(file))
+
 print(introspection_info(42))
 print(introspection_info('строка'))
 print(introspection_info(data_1))
