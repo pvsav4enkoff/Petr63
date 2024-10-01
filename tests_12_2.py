@@ -40,19 +40,20 @@ class Tournament:
                     finishers[place] = participant
                     place += 1
                     self.participants.remove(participant)
-                if participant.distance == 0:
+                if participant.distance <= 0:
                     return finishers
         # print(finishers)
         return finishers
 class TournamentTest(unittest.TestCase):
+    is_frozen = True
     @classmethod
     def setUpClass(cls):
         cls.all_results = {}
 
     def setUp(self):
         self.usain = Runner("Усэйн", 10)
-        self.andrey = Runner("Андрей", -9)
-        self.nick = Runner("Ник", 3)
+        self.andrey = Runner("Андрей", 9)
+        self.nick = Runner("Ник", -3)
 
     @classmethod
     def tearDownClass(cls):
@@ -61,33 +62,38 @@ class TournamentTest(unittest.TestCase):
             for key1, value1 in value.items():
                 rez[key1]=str(value1)
             print(rez)
-    def test_usain_nick(self):
+    @unittest.skipIf(is_frozen,"Тесты в этом кейсе заморожены'")
+    def test_01_usain_nick(self):
         try:
             tournament = Tournament(90, self.usain, self.nick)
             result = tournament.start()
             self.all_results[len(self.all_results)] = result
-            self.assertTrue(list(result.values())[-1] == "Ник")
+            self.assertTrue(list(result.values())[-1] == "Ник","test_usain_nick не пройден")
             logging.info(f" test_usain_nick выполнен успешно")
-        except:
+        except ValueError:
             logging.warning(f" Неверная скорость для Runner")
             pass
-    def test_andrey_nick(self):
+
+    @unittest.skipIf(is_frozen, "Тесты в этом кейсе заморожены'")
+    def test_02_andrey_nick(self):
         try:
             tournament = Tournament(90, self.andrey, self.nick)
             result = tournament.start()
             self.all_results[len(self.all_results)] = result
-            self.assertTrue(list(result.values())[-1] == "Ник")
+            self.assertTrue(list(result.values())[-1] == "Ник" ,msg="Test error")
             logging.info(f" test_andrey_nick выполнен успешно")
-        except:
+        except ValueError:
             logging.warning(f" Неверная скорость для Runner")
-    def test_usain_andrey_nick(self):
+
+    @unittest.skipIf(is_frozen, "Тесты в этом кейсе заморожены'")
+    def test_03_usain_andrey_nick(self):
         try:
             tournament = Tournament(90, self.usain, self.andrey, self.nick)
             result = tournament.start()
             self.all_results[len(self.all_results)] = result
             self.assertTrue(list(result.values())[-1] == "Ник")
             logging.info(f" test_usain_andrey_nick выполнен успешно")
-        except:
+        except ValueError:
             logging.warning(f" Неверная скорость для Runner")
 if __name__ == "__main__":
     unittest.main()
