@@ -14,11 +14,13 @@ async def add_ending(number, endings):
 endings = ('шар', 'шара', 'шаров')
 async def start_strongman(name, power):
     print(f"Силач {name} начал соревнования.")
-    for i in range(1,6):
-        await asyncio.sleep(power)
+    i=1
+    while i <= 5:
+        await asyncio.sleep(2/power)
         task = asyncio.create_task(add_ending(i,endings))
         await task
         print(f"Силач {name} поднял {i} {task.result()}")
+        i+=1
     print(f"Силач {name} закончил соревнования.")
 async def start_tournament():
     task1 = asyncio.create_task(start_strongman('Вася', 1))
