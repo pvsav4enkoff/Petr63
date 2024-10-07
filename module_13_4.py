@@ -4,7 +4,7 @@ from aiogram.dispatcher.filters.state import State, StatesGroup
 from aiogram.dispatcher import FSMContext
 import asyncio
 
-api =  "7874058890:AAG5ytMjLAppzNZG2rSGtlci-sIPUYJbDx0"
+api =  ""
 bot=Bot(token=api)
 dp=Dispatcher(bot, storage=MemoryStorage())
 class State(StatesGroup):
