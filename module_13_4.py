@@ -69,15 +69,14 @@ async def send_calories(message, state):
     if data['sex'].isdigit():
         if int(data['sex']) == 1:
             Calories= (10*int(data['weigth']))+(6.25 * int(data['growth']))-(5*int(data['age']))+5
-            await message.answer(f"Ваша норма калорий {Calories}")
         elif int(data['sex']) == 2:
             Calories = (10 * int(data['weigth'])) + (6.25 * int(data['growth'])) - (5 * int(data['age']))-161
-            await message.answer(f"Ваша норма калорий {Calories}")
         else:
             await message.answer(f"Не верное значение пол (1 - муж, 2 - жен)")
     else:
         await message.answer('Должна быть цифра')
         await state.finish()
+    await message.answer(f"Ваша норма калорий {Calories}")
     await state.finish()
 
 
