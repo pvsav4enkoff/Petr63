@@ -12,7 +12,7 @@ dp=Dispatcher(bot, storage=MemoryStorage())
 
 
 kb =ReplyKeyboardMarkup(resize_keyboard=True)
-b1=KeyboardButton(text = "Расчитать")
+b1=KeyboardButton(text = "Рассчитать")
 b2=KeyboardButton(text = "Информация")
 kb.add(b1)
 kb.add(b2)
@@ -109,7 +109,7 @@ async def send_calories(message, state):
     except ValueError:
         await message.answer('Должна быть цифра. Тест прерван')
         await state.finish()
-    await message.answer(f"Ваша норма калорий {Calories}")
+    await message.answer(f"Ваша норма калорий {Calories} ккал")
     await state.finish()
 
 
