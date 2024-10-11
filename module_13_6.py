@@ -33,7 +33,7 @@ class State(StatesGroup):
 async def start(message):
     await message.answer('Привет! Я бот помогающий твоему здоровью.',reply_markup = kb)
 
-@dp.message_handler(text = 'Расчитать')
+@dp.message_handler(text = 'Рассчитать')
 async def main_menu(message):
     await message.answer('Выберите опцию:', reply_markup = kb2)
 
