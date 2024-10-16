@@ -18,11 +18,11 @@ cursor.execute("DELETE FROM users WHERE id IS NOT NULL")
 for i in range(10):
     cursor.execute("INSERT INTO Users(username,email,age,balance) VALUES(?, ?, ?, ?)",(f"User{i+1}",f"example{i+1}@gmail.com",f"{(i+1)*10}",1000))
 
-cursor.execute("UPDATE Users SET balance = 500 WHERE id % 2 != 0")
+cursor.execute("UPDATE Users SET balance = ? WHERE id % ? != 0",(500,2))
 
-cursor.execute("DELETE FROM Users WHERE id % 3 = 1")
+cursor.execute("DELETE FROM Users WHERE id % ? = 1",(3,))
 
-cursor.execute("SELECT username, email, age, balance FROM Users WHERE age != 60")
+cursor.execute("SELECT username, email, age, balance FROM Users WHERE age != ?",(60,))
 
 rows = cursor.fetchall()
 
