@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS Users(
     )
 
 ''')
-cursor.execute("DELETE FROM Users")
+cursor.execute("DELETE FROM users WHERE id IS NOT NULL")
 
 for i in range(10):
     cursor.execute("INSERT INTO Users(username,email,age,balance) VALUES(?, ?, ?, ?)",(f"User{i+1}",f"example{i}@gmail.com",f"{(i+1)*10}",1000))
