@@ -69,7 +69,6 @@ async def get_buying_list(message):
     await initiate_db()
     rows = await get_all_products()
     for row in rows:
-        # print(f"Продукт:{row[0]} | Описание: {row[1]} | Цена: {row[2]} | foto: {row[3]}")
         with open(row[3],"rb") as img:
             await message.answer(f'Название: {row[0]} | Описание: {row[1]} | Цена: {row[2]}' )
             await message.answer_photo(img)
