@@ -32,7 +32,5 @@ async def get_all_products():
     cursor.execute("SELECT title,description,price,pic FROM Products")
     rows = cursor.fetchall()
     return rows
-    # for row in rows:
-    #     print(f"Имя:{row[0]} | Почта: {row[1]} | Возраст: {row[2]} | Баланс: {row[3]}")
     connection.commit()
     connection.close()
