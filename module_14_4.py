@@ -5,19 +5,10 @@ from aiogram.dispatcher import FSMContext
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, ReplyKeyboardRemove, update
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 import asyncio
-# from telegram.ext import Updater, CommandHandler, MessageHandler
 from crud_functions import *
-
-
-
-
-
-
 api =  ""
 bot=Bot(token=api)
 dp=Dispatcher(bot, storage=MemoryStorage())
-
-
 
 kb =ReplyKeyboardMarkup(resize_keyboard=True)
 b1=KeyboardButton(text = "Рассчитать")
@@ -42,7 +33,6 @@ catalog_kb = InlineKeyboardMarkup(
         ]
     ], resize_keyboard= True
 )
-
 
 class State(StatesGroup):
     age = State()
