@@ -3,7 +3,7 @@ from aiogram.contrib.fsm_storage.memory import MemoryStorage
 import handlers
 from handlers import *
 
-api =  "7874058890:AAG5ytMjLAppzNZG2rSGtlci-sIPUYJbDx0"
+api =  ""
 bot=Bot(token=api)
 dp=Dispatcher(bot, storage=MemoryStorage())
 
