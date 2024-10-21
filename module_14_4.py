@@ -56,14 +56,12 @@ async def inf_formula(call):
 
 @dp.message_handler(text = 'Купить')
 async def get_buying_list(message):
-    await initiate_db()
+    initiate_db()
     rows = await get_all_products()
     for row in rows:
         with open(row[3],"rb") as img:
             await message.answer(f'Название: {row[0]} | Описание: {row[1]} | Цена: {row[2]}' )
             await message.answer_photo(img)
-
-
     await message.answer('Выберите продукт для покупки:', reply_markup=catalog_kb)
 
 @dp.callback_query_handler(text="product_buying")
