@@ -24,11 +24,12 @@ async def app_user(username: str, age: int):
     if len(users) == 0:
         us.id = 1
     else:
-        us.id = len(users) + 1
+        max_id = max(user.id for user in users)
+        us.id = max_id + 1
     us.username = username
     us.age = age
     users.append(us)
-    return f"User {us.id} is registered"
+    return f"User {us.username} is registered"
 
 
 @app.put('/user/{user_id}/{username}/{age}')
