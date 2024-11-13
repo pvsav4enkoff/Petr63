@@ -5,11 +5,11 @@ from sqlalchemy.orm import relationship
 
 class User(Base):
     __tablename__ = 'users'
-    id = Column(Integer, primary_key=True, unique=True)
-    username = Column(String)  # - строка.
-    firstname = Column(String)  # - строка.
-    lastname = Column(String)  # - строка.
-    age = Column(Integer)  # - целое число.
+    id = Column(Integer, primary_key=True)
+    username = Column(String)
+    firstname = Column(String)
+    lastname = Column(String)
+    age = Column(Integer)
     slug = Column(String, index=True, unique=True)
 
     tasks = relationship("tasks", back_populates='users')
