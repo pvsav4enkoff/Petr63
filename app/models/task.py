@@ -4,7 +4,7 @@ from sqlalchemy.orm import relationship
 from user import User
 class Task(Base):
     __tablename__ = 'tasks'
-    id = Column(Integer, primary_key=True, unique=True)
+    id = Column(Integer, primary_key=True)
     title = Column(String)
     content = Column(String)
     priority = Column(Integer, default=0)
