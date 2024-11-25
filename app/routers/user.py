@@ -48,6 +48,15 @@ async def update_user(user_id: int, db: Annotated[Session, Depends(get_db)], upd
         'transaction': 'User update is successful!'
     }
 
+@router.get("/user_id/tasks")
+async def tasks_by_user_id(user_id: int, db: Annotated[Session, Depends(get_db)]):
+    task_get = select(Task).where(Task.user_id == user_id)
+    query = db.scalars(task_get).all()
+    if len(query) == 0:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail='Task was not found')
+    return query
 
 @router.post("/create")
 async def creat_user(db: Annotated[Session, Depends(get_db)], create_user: CreateUser):
